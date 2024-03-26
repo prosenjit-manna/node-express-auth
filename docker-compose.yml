@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+  postgres:
+      image: postgres:15.4
+      volumes:
+        - ./tmp/db/postgresql:/var/lib/postgresql/data
+      environment:
+        - POSTGRES_PASSWORD=postgresPasswword
+        - POSTGRES_USER=nodeProdUser
+        - POSTGRES_DB=node_pretaa_testing
+      ports:
+        - '5432:5432'
+
+  mongo:
+    image: mongo
+    volumes:
+        - ./tmp/db/mongo:/var/lib/mongo/data
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: mongoPassword
+      MONGO_INITDB_DATABASE: db
+    ports:
+      - '27017:27017'    
+
+      # mongodb://root:mongoPassword@localhost:27017
