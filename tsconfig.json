@@ -1,6 +1,5 @@
 {
     "compilerOptions": {
-      "types": ["node"],
      "incremental": true,
       "target": "es6",
       "module": "commonjs",
@@ -8,7 +7,8 @@
       "strict": true,
       "esModuleInterop": true,
       "skipLibCheck": true,
-      "forceConsistentCasingInFileNames": true
+      "forceConsistentCasingInFileNames": true,
+      "typeRoots": ["./src/typings/", "node_modules/@types" ]
     },
     "include": ["src/**/*.ts"],
     "exclude": ["node_modules", "dist"]
