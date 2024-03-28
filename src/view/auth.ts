@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import { UserModel } from '../models/User';
 import jwt from 'jsonwebtoken';
 import express, { Request, Response } from 'express';
+import { get_env } from '../lib/get-env';
 const router = express.Router();
 
 router.post('/register', async (req, res) => {
@@ -30,7 +31,7 @@ router.post('/login', async (req, res) => {
     if (!passwordMatch) {
       return res.status(401).json({ error: 'Authentication failed' });
     }
-    const token = jwt.sign({ userId: user._id }, 'your-secret-key', {
+    const token = jwt.sign({ userId: user._id }, get_env.JSON_WEB_TOKEN_SECRET, {
       expiresIn: '1h',
     });
     res.status(200).json({ token });
