@@ -1,10 +1,11 @@
 import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
+import { get_env } from './lib/get-env';
+
 import authRoutes from './view/auth';
 import protectedRoutes from './view/protected-routes';
 import { dbConnect } from './db/connection';
-import { get_env } from './lib/get-env';
 
 dbConnect();
 
