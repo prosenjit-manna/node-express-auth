@@ -1,22 +1,22 @@
 import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
-import authRoutes from './view/auth';
-import { dbConnect } from './db/connection';
-
 dotenv.config();
+import authRoutes from './view/auth';
+import protectedRoutes from './view/protected-routes';
+import { dbConnect } from './db/connection';
+import { get_env } from './lib/get-env';
 
 dbConnect();
 
 const app = express();
-const port = process.env.PORT ?? 4000;
 app.use(express.json());
 app.use('/auth', authRoutes);
+app.use(protectedRoutes);
 
 app.get('/', (req: Request, res: Response) => {
-  console.log('hello world');
-  res.send('Hello, TypeScript Express!');
+  res.send('API server up and running!');
 });
 
-app.listen(port, () => {
-  console.log(`API Server running at http://localhost:${port}`);
+app.listen(get_env.PORT, () => {
+  console.log(`API Server running at http://localhost:${get_env.PORT}`);
 });
